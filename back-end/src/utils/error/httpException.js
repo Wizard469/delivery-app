@@ -1,6 +1,3 @@
-export default class HttpException extends Error {
-  constructor(status, message) {
-    super(message);
-    this.status = status;
-  }
-}
+const HttpException = (status, message) => ({ status, message });
+
+module.exports = HttpException;
