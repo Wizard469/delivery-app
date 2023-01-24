@@ -1,13 +1,13 @@
 const adminService = require('../service/admin-service');
 
-const createNewUser = async (req, res) => {
+const createNewUser = async (req, res, next) => {
   try {
-    const { id, name, email, password } = req.body;
-    const newUser = await userService.create({ id, name, email, password });
-    res.status(200).json(newUser);
+    const { name, email, password, role } = req.body;
+    const newUser = await adminService.createNewUser({ name, email, password, role }); //! checar se vem com o id
+    res.status(201).json(newUser);
     
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    next(err);
   }
 
 };

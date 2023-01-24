@@ -3,7 +3,7 @@ const newUserValidation = (email, password, roleSelected) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   return (emailRegex.test(email) && password.length >= maxName
-   && roleSelected !== undefined); // não sei se funciona
+   && !roleSelected); // não sei se funciona
 };
 
 export default newUserValidation;

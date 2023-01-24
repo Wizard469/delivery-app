@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter } from 'react-router-dom';
+import Provider from './context/Provider';
 import Routes from './Routes';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Provider>
       <Routes />
-    </BrowserRouter>
+    </Provider>
   );
 }
 

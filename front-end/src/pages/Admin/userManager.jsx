@@ -7,8 +7,9 @@ export default function UserManager() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [roleSelected, setRoleSelected] = useState('');
+  const [roleSelected, setRoleSelected] = useState('vendedor');
   const [isRegisterBtnDisabled, setIsRegisterBtnDisabled] = useState(true);
+  const [failedRegister] = useState(false);
 
   useEffect(() => {
     if (newUserValidation(email, password, roleSelected)) setIsRegisterBtnDisabled(false);
@@ -61,7 +62,9 @@ export default function UserManager() {
             value={ roleSelected }
             onChange={ (e) => setRoleSelected(e.target.value) }
           >
-            <option value="vendedor">Vendedor</option>
+            <option value="seller">Vendedor</option>
+            <option value="customer">Cliente</option>
+            <option value="administrator">Administrador</option>
           </select>
           <button
             type="button"
@@ -70,6 +73,16 @@ export default function UserManager() {
           >
             Cadastrar
           </button>
+          {
+            (failedRegister)
+        && (
+          <p data-testid="admin_manage__element-invalid-register">
+            email ou usuários já cadastrados
+            <br />
+            Por favor, tente novamente.
+          </p>
+        )
+          }
         </form>
       </section>
     </div>

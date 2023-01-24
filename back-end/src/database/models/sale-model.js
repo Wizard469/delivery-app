@@ -61,7 +61,7 @@ const SaleModel = (sequelize, DataTypes) => {
 
   Sale.associate = (models) => {
     Sale.belongsTo(models.User, { foreignKey: 'saleId', as: 'sale' });
-    Sale.hasMany(models.User, { foreignKey: 'sellerId', as: 'seller' });
+    Sale.belongsTo(models.User, { foreignKey: 'sellerId', as: 'seller' });
   }
   return Sale;
 };
