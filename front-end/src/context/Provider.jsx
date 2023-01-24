@@ -3,16 +3,23 @@ import PropTypes from 'prop-types';
 import Context from './Context';
 
 function Provider({ children }) {
+  const [user, setUser] = useState({});
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const setLocalStorage = (key, info) => {
+    localStorage.setItem(key, JSON.stringify(info));
+  };
 
   const context = useMemo(() => ({
+    loading,
+    setLoading,
     orders,
     setOrders,
-    setLoading,
     user,
     setUser,
     setLocalStorage,
-  }), [orders]);
+  }), [orders, loading, user]);
 
   return (
     <Context.Provider value={ context }>
