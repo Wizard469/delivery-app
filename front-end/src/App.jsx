@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { Switch, Route } from 'react-router-dom';
 import Products from './pages/customer/products';
 import Provider from './context/Provider';
 import SellerOrders from './pages/seller/sellerOrders';
