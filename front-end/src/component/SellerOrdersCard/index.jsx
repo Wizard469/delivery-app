@@ -8,7 +8,7 @@ function SellerOrdersCard({
   order,
   status,
   saleDate,
-  totalPrice,
+  // totalPrice,
   deliveryAddress,
   deliveryNumber,
 }) {
@@ -40,30 +40,32 @@ function SellerOrdersCard({
     <div
       className="seller-order-card-container"
       data-testid={ `seller_orders__element-order-id-${saleId}` }
-      onClick={ () => onClick(saleId) } 
+      onClick={ () => onClick(saleId) }
+      aria-hidden="true"
     >
       <div className="seller-info">
-        <h3 className="order-title">{ `Pedido ${order}` }</h3>
+        <h3 className="order-title">{`Pedido ${order}`}</h3>
       </div>
 
       <div>
         <div
-        className={ `seller-order-status-${statusUpdate}` }
-        data-testid={ `seller_orders__element-delivery-status-${saleId}` }
+          className={ `seller-order-status-${statusUpdate}` }
+          data-testid={ `seller_orders__element-delivery-status-${saleId}` }
         >
-        Preparando
+          Preparando
         </div>
       </div>
 
       <div>
         <ul className="seller_orders_list">
-          <li 
-          className="seller_orders_li"  
-          data-testid={ `seller_orders__element-order-date-${saleId}` }>
-           {handleDate(saleDate)}
+          <li
+            className="seller_orders_li"
+            data-testid={ `seller_orders__element-order-date-${saleId}` }
+          >
+            {handleDate(saleDate)}
           </li>
           <li
-          className="seller_orders_li"
+            className="seller_orders_li"
           >
             R$
             {' '}
@@ -71,9 +73,10 @@ function SellerOrdersCard({
           </li>
         </ul>
         <p
-        className='seller_orders_adress'
-        data-testid={ `seller_orders__element-card-address-${saleId}` }> 
-        { `Endereço: ${deliveryAddress}, ${deliveryNumber}`}
+          className="seller_orders_adress"
+          data-testid={ `seller_orders__element-card-address-${saleId}` }
+        >
+          {`Endereço: ${deliveryAddress}, ${deliveryNumber}`}
         </p>
       </div>
     </div>
@@ -82,6 +85,14 @@ function SellerOrdersCard({
 
 export default SellerOrdersCard;
 
-SellerOrdersCard.propType = {
-  saleId: PropTypes.string,
+SellerOrdersCard.propTypes = {
+  SellerOrdersCard: PropTypes.shape({
+    saleId: PropTypes.string,
+    order: PropTypes.string,
+    status: PropTypes.string,
+    saleDate: PropTypes.string,
+    totalPrice: PropTypes.number,
+    deliveryAddress: PropTypes.string,
+    deliveryNumber: PropTypes.number,
+  }),
 }.isRequired;
