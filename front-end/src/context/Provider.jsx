@@ -11,7 +11,7 @@ function Provider({ children }) {
     // user,
     // setUser,
     // setLocalStorage,
-  }), [setOrders]);
+  }), [orders, setOrders]);
 
   return (
     <Context.Provider value={ context }>
