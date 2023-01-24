@@ -12,7 +12,7 @@ export default function Routes() {
       </Route>
       <Route path="/login" component={ Login } />
       <Route path="/customer/products" component={ Products } />
-      <Route exact path="/seller/orders" component={ SellerOrders } />
+      <Route path="/seller/orders" component={ SellerOrders } />
     </Switch>
   );
 }

@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
 import React from 'react';
@@ -12,27 +12,27 @@ function SellerOrdersCard({
   deliveryAddress,
   deliveryNumber,
 }) {
-  const history = useHistory();
+  // const history = useHistory();
 
-  let statusUpdate = '';
-  if (status === 'Preparando') {
-    statusUpdate = 'seller-order-status-preparando';
-  }
-  if (status === 'Entregue') {
-    statusUpdate = 'seller-order-status-entregue';
-  }
+  // let statusUpdate = '';
+  // if (status === 'Preparando') {
+  //   statusUpdate = 'seller-order-status-preparando';
+  // }
+  // if (status === 'Entregue') {
+  //   statusUpdate = 'seller-order-status-entregue';
+  // }
 
-  const onClick = (value) => {
-    history.push({
-      pathname: `/seller/orders/${value}`,
-      state: order,
-    });
-  };
+  // const onClick = (value) => {
+  //   history.push({
+  //     pathname: `/seller/orders/${value}`,
+  //     state: order,
+  //   });
+  // };
 
-  const handleDate = (date) => {
-    const dateObj = new Date(date);
-    return dateObj.toLocaleDateString('pt-br');
-  };
+  // const handleDate = (date) => {
+  //   const dateObj = new Date(date);
+  //   return dateObj.toLocaleDateString('pt-br');
+  // };
 
   return (
     <div
