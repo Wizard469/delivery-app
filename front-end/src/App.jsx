@@ -1,5 +1,4 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Products from './pages/customer/products';
 import Provider from './context/Provider';
