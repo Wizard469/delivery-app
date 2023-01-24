@@ -72,7 +72,7 @@ function SellerOrdersCard({
           <p
             data-testid={ `seller_orders__element-card-price-${saleId}` }
           >
-            {totalPrice}
+            {`R$ ${totalPrice.replace(/\./, ',')}`}
           </p>
         </ul>
         <p
