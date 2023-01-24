@@ -7,7 +7,7 @@ const login = async (body) => {
   const { email, password } = body;
   const user = await User.findOne({ where: { email } });
 
-  if (!user) throw new HttpException(404, 'User not found');
+  if (!user) throw new HttpException(404, 'Not found');
 
   const { name, password: pwd, role } = user;
   const md5Pwd = md5(password);
@@ -15,7 +15,7 @@ const login = async (body) => {
   if (md5Pwd === pwd) {
     const token = jwtSign({ name, email, role });
 
-    return { token };
+    return { name, email, role, token };
   }
 };
 
