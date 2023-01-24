@@ -1,10 +1,24 @@
-// const { User } = require('../database/models');
-// const { default: HttpException } = require('../utils/error/httpException');
+const md5 = require('md5');
+const { User } = require('../database/models');
+const HttpException = require('../utils/error/httpException');
+const { jwtSign } = require('../utils/jwt');
 
-// const login = (email, password) => {
-//   const user = User.findOne({ where: { email } });
+const login = async (body) => {
+  const { email, password } = body;
+  const user = await User.findOne({ where: { email } });
 
-//   if (!user) throw new HttpException(404, 'User not found');
+  if (!user) throw new HttpException(404, 'User not found');
 
-//   // const { name, password, } = user;
-// };
+  const { name, password: pwd, role } = user;
+  const md5Pwd = md5(password);
+
+  if (md5Pwd === pwd) {
+    const token = jwtSign({ name, email, role });
+
+    return { token };
+  }
+};
+
+module.exports = {
+  login,
+};
