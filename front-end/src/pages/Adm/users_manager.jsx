@@ -55,17 +55,14 @@ export default function UserManager() {
               value={ password }
             />
           </label>
-          <label htmlFor="select-role">
-            Tipo
-            <select
-              name="select-role"
-              data-testid="admin_manage__select-role"
-              value={ roleSelected }
-              onChange={ (e) => setRoleSelected(e.target.value) }
-            >
-              <option value="vendedor">Vendedor</option>
-            </select>
-          </label>
+          <select
+            name="select-role"
+            data-testid="admin_manage__select-role"
+            value={ roleSelected }
+            onChange={ (e) => setRoleSelected(e.target.value) }
+          >
+            <option value="vendedor">Vendedor</option>
+          </select>
           <button
             type="button"
             data-testid="admin_manage__button-register"
