@@ -5,7 +5,7 @@ function Header() {
   return (
     <header className="Header">
       <Link
-        // to="/customer/orders" - não sei se está certo
+        to="/customer/products"
         data-testid="customer_products__element-navbar-link-orders"
       >
         Gerenciar Usuários
