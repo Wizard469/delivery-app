@@ -3,7 +3,7 @@ const controller = require('../controller/sales-controller');
 
 const router = Router();
 
-router.post('/', controller.newSale);
+// router.post('/', controller.newSale);
 
 router.get('/', controller.getAll);
 

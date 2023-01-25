@@ -1,21 +1,16 @@
 const express = require('express');
-const cors = require('cors');
-const productsRouter = require('../routes/products-route');
-const salesRouter = require('../routes/sales-route');
-// const { default: ErrorHandler } = require('./utils/error/errorMiddleware');
+const cors = require('../middlewares/cors');
 const routes = require('../routes');
+const errorMiddleware = require('../utils/error/errorMiddleware');
 
 const app = express();
-app.use(cors());
+app.use(cors);
 
 app.use(express.json());
 
 app.get('/coffee', (_req, res) => res.status(418).end());
-
-app.use('/products', productsRouter);
-app.use('/sales', salesRouter);
 app.use(routes);
 
-// app.use(errorMiddleware);
+app.use(errorMiddleware);
 
 module.exports = app;

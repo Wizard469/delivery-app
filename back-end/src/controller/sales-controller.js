@@ -5,21 +5,22 @@ const getAll = async (req, res) => {
   return res.status(200).json(allSales);
 };
 
-const newSale = async (req, res) => {
-  const { user } = req;
-  const { sales, seller, address } = req.body;
+// const newSale = async (req, res) => {
+//   const { user } = req;
+//   console.log('body',req.body)
+//   const { sales, seller, address } = req.body;
 
-  const sale = await newSale({ sales, seller, user, address });
-  try {
-    await Promise.all(sales.map(async ({ id, quantity }) => {
-      await service.saleProduct({ productId: id, quantity, saleId: sale.id });
-      return null;
-    }));
-    return res.status(201).json(sale.id);
-  } catch (error) {
-    return res.status(400).json(error);
-  }
-};
+//   const sale = await service.newSale({ sales, seller, user, address });
+//   try {
+//     await Promise.all(sales.map(async ({ id, quantity }) => {
+//       await service.saleProduct({ productId: id, quantity, saleId: sale.id });
+//       return null;
+//     }));
+//     return res.status(201).json(sale.id);
+//   } catch (error) {
+//     return res.status(400).json(error);
+//   }
+// };
 
 const saleId = async (req, res, next) => {
   try {
@@ -31,5 +32,5 @@ const saleId = async (req, res, next) => {
 };
 
 module.exports = {
-  getAll, newSale, saleId,
+  getAll, saleId,
 };
