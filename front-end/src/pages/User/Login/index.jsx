@@ -1,6 +1,6 @@
+import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import loginValidation from '../../../utils/loginValidation';
-import { useHistory } from 'react-router-dom';
 
 export default function Login() {
   const [email, setEmail] = useState('');

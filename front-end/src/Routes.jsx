@@ -13,12 +13,8 @@ export default function Routes() {
       </Route>
       <Route path="/login" component={ Login } />
       <Route path="/customer/products" component={ Products } />
-<<<<<<< HEAD
-      <Route path="/seller/orders" component={ SellerOrders } />
-=======
       <Route path="/admin/manage" component={ UserManager } />
-      <Route exact path="/seller/orders" component={ SellerOrders } />
->>>>>>> main-group-19
+      <Route path="/seller/orders" component={ SellerOrders } />
     </Switch>
   );
 }

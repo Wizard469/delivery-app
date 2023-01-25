@@ -16,17 +16,10 @@ function Provider({ children }) {
     setLoading,
     orders,
     setOrders,
-<<<<<<< HEAD
     user,
     setUser,
     setLocalStorage,
   }), [orders, loading, user]);
-=======
-    // user,
-    // setUser,
-    // setLocalStorage,
-  }), [orders, setOrders]);
->>>>>>> main-group-19
 
   return (
     <Context.Provider value={ context }>
