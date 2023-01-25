@@ -1,8 +1,9 @@
 const { User } = require('../database/models');
-const { HttpException } = require('../utils/error/httpException');
+const HttpException = require('../utils/error/httpException');
 
 const createNewUser = async (newUser) => {
   const { name, email, password, role } = newUser; 
+  console.log('newUser:', newUser);
   const verifyName = await User.findOne({ where: { name } });
   const verifyEmail = await User.findOne({ where: { email } });
 

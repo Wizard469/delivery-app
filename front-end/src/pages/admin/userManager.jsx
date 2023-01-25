@@ -2,19 +2,29 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header/index';
 import newUserValidation from '../../utils/newUserValidation';
 import './Header/styles.css';
+import NewUser from '../../services/admin';
 
 export default function UserManager() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [roleSelected, setRoleSelected] = useState('vendedor');
+  const [role, setRole] = useState('vendedor');
   const [isRegisterBtnDisabled, setIsRegisterBtnDisabled] = useState(true);
-  const [failedRegister] = useState(false);
+  const [failedRegister, setFailedRegister] = useState(false);
 
   useEffect(() => {
-    if (newUserValidation(email, password, roleSelected)) setIsRegisterBtnDisabled(false);
-    else setIsRegisterBtnDisabled(true);
-  }, [email, password, roleSelected]);
+    if (newUserValidation(email, password)) {
+      setIsRegisterBtnDisabled(false);
+    } else setIsRegisterBtnDisabled(true);
+  }, [email, password, role]);
+
+  const checkNewUser = async () => {
+    console.log({ name, email, password, role });
+    const response = await NewUser({ name, email, password, role });
+    if ('message' in response) {
+      setFailedRegister(true);
+    }
+  };
 
   return (
     <div>
@@ -59,8 +69,8 @@ export default function UserManager() {
           <select
             name="select-role"
             data-testid="admin_manage__select-role"
-            value={ roleSelected }
-            onChange={ (e) => setRoleSelected(e.target.value) }
+            value={ role }
+            onChange={ (e) => setRole(e.target.value) }
           >
             <option value="seller">Vendedor</option>
             <option value="customer">Cliente</option>
@@ -70,6 +80,7 @@ export default function UserManager() {
             type="button"
             data-testid="admin_manage__button-register"
             disabled={ isRegisterBtnDisabled }
+            onClick={ checkNewUser }
           >
             Cadastrar
           </button>
