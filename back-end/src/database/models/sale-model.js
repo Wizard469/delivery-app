@@ -63,7 +63,7 @@ const SaleModel = (sequelize, DataTypes) => {
     // Sale.belongsTo(models.User, { foreignKey: 'saleId', as: 'sale' });
     Sale.belongsTo(models.User, { foreignKey: 'sellerId', as: 'seller' });
   }
-  return Sale;
+  return Sale; 
 };
 
 module.exports = SaleModel;
