@@ -5,7 +5,7 @@ const errorMiddleware = require('../utils/error/errorMiddleware');
 
 const app = express();
 app.use(cors);
-app.use(express.static('public'))
+app.use(express.static('public'));
 app.use(express.json());
 
 app.get('/coffee', (_req, res) => res.status(418).end());
