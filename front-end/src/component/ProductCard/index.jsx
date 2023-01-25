@@ -1,9 +1,33 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import CartContext from '../../context/CartContext';
 import './styles.css';
 
 function ProductCard({ product }) {
   const [quantity, setQuantity] = useState(0);
+  const { cart, setCart } = useContext(CartContext);
+
+  const updateCart = () => {
+    const newCart = cart.some((cartProduct) => product.id === cartProduct.id)
+      ? cart.map((cartProduct) => {
+        if (product.id === cartProduct.id) {
+          return {
+            ...cartProduct,
+            price: product.price,
+            id: product.id,
+            quantity,
+          };
+        }
+        return cartProduct;
+      }).filter((element) => element.quantity > 0)
+      : [...cart, { price: product.price, id: product.id, quantity }];
+    setCart(newCart);
+  };
+
+  useEffect(() => {
+    updateCart();
+  }, [quantity]);
+
   return (
     <div className="ProductCard">
       <div className="img-container">
