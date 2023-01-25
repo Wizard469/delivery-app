@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
 import React from 'react';
@@ -8,18 +8,16 @@ function SellerOrdersCard({
   order,
   status,
   saleDate,
-  // totalPrice,
+  totalPrice,
   deliveryAddress,
   deliveryNumber,
 }) {
   const history = useHistory();
 
   let statusUpdate = '';
-
   if (status === 'Preparando') {
     statusUpdate = 'seller-order-status-preparando';
   }
-
   if (status === 'Entregue') {
     statusUpdate = 'seller-order-status-entregue';
   }
@@ -52,7 +50,7 @@ function SellerOrdersCard({
           className={ `seller-order-status-${statusUpdate}` }
           data-testid={ `seller_orders__element-delivery-status-${saleId}` }
         >
-          Preparando
+          {status}
         </div>
       </div>
 
@@ -71,6 +69,11 @@ function SellerOrdersCard({
             {' '}
             {' '}
           </li>
+          <p
+            data-testid={ `seller_orders__element-card-price-${saleId}` }
+          >
+            {`R$ ${totalPrice.replace(/\./, ',')}`}
+          </p>
         </ul>
         <p
           className="seller_orders_adress"
