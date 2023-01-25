@@ -8,11 +8,10 @@ function Provider({ children }) {
   const context = useMemo(() => ({
     orders,
     setOrders,
-    // setLoading,
     // user,
     // setUser,
     // setLocalStorage,
-  }), [orders]);
+  }), [orders, setOrders]);
 
   return (
     <Context.Provider value={ context }>

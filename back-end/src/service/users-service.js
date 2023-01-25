@@ -7,7 +7,7 @@ const login = async (body) => {
   const { email, password } = body;
   const user = await User.findOne({ where: { email } });
 
-  if (!user) throw new HttpException(404, 'Not found');
+  if (!user) throw new HttpException(404, 'User not found');
 
   const { name, password: pwd, role } = user;
   const md5Pwd = md5(password);

@@ -3,6 +3,6 @@ const adminController = require('../controller/admin-controller');
 
 const router = Router();
 
-router.post('/manage', adminController.createNewUser);
+router.post('/', adminController.createNewUser);
 
 module.exports = router;
