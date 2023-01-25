@@ -1,0 +1,14 @@
+.Header {
+  display: flex;
+  gap: 5px;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+label {
+  margin-right: 10px;
+}
+
+input {
+  margin-left: 10px;
+}
