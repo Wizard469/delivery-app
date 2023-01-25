@@ -15,7 +15,7 @@ const login = async (body) => {
   if (md5Pwd === pwd) {
     const token = jwtSign({ name, email, role });
 
-    return { token };
+    return { name, email, role, token };
   }
 };
 
