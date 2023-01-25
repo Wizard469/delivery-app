@@ -1,3 +1,4 @@
+import { useHistory } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import loginValidation from '../../../utils/loginValidation';
 
@@ -6,6 +7,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [isLoginBtnDisabled, setIsLoginBtnDisabled] = useState(true);
   const [failedLogin] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     if (loginValidation(email, password)) setIsLoginBtnDisabled(false);
@@ -34,6 +36,7 @@ export default function Login() {
           type="button"
           data-testid="common_login__button-login"
           disabled={ isLoginBtnDisabled }
+          onClick={ () => history.push('/seller/orders') }
         >
           LOGIN
         </button>
