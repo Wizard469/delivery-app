@@ -6,8 +6,6 @@ import loginValidation from '../../../utils/loginValidation';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogged, setIsLogged] = useState(false);
-  const [userRole, setUserRole] = useState('');
   const [isLoginBtnDisabled, setIsLoginBtnDisabled] = useState(true);
   const [failedLogin, setFailedLogin] = useState(false);
 
@@ -32,16 +30,12 @@ export default function Login() {
   const login = async () => {
     try {
       const response = await postRequest(data);
-      console.log(response);
 
       localStorage.setItem('user', JSON.stringify({ ...response }));
-      setIsLogged(true);
-      setUserRole(response.role);
 
-      if (isLogged && userRole === 'seller') history.push('/seller/orders');
-      if (isLogged && userRole === 'customer') history.push('/customer/products');
+      if (response.role === 'seller') history.push('/seller/orders');
+      if (response.role === 'customer') history.push('/customer/products');
     } catch (err) {
-      setIsLogged(false);
       setFailedLogin(true);
     }
   };
