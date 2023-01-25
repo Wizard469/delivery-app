@@ -42,5 +42,5 @@ const saleId = async (id) => {
 };
 
 module.exports = {
-  getAll, newSale, saleProduct, saleById
+  getAll, newSale, saleProduct, saleId,
 };
