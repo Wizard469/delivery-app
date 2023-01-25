@@ -1,11 +1,10 @@
-const salesService = require('../service/products-service');
+const service = require('../service/sales-service');
 
-const sales = async (req, res) => {
-  const allSales = await salesService.getAll();
-
+const getAll = async (req, res) => {
+  const allSales = await service.getAll();
   return res.status(200).json(allSales);
 };
 
 module.exports = {
-  sales,
+  getAll,
 };
