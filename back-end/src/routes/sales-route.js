@@ -3,12 +3,10 @@ const controller = require('../controller/sales-controller');
 
 const router = Router();
 
-// router.post('/', sales.newSale);
+router.post('/', controller.newSale);
 
 router.get('/', controller.getAll);
 
-// router.get('/seller/orders', sales.sales);
-
-// router.get('/:id', salesById);
+router.get('/:id', controller.saleId);
 
 module.exports = router;
