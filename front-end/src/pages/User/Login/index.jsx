@@ -29,7 +29,7 @@ export default function Login() {
 
   const login = async () => {
     try {
-      const response = await postRequest(data);
+      const response = await postRequest('/login', data);
 
       localStorage.setItem('user', JSON.stringify({ ...response }));
 
