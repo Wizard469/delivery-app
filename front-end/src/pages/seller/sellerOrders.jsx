@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../../component/Header';
+import React, { useState, useEffect } from 'react';
+import SellerHeader from '../../component/SellerHeader.jsx';
 import SellerOrdersCard from '../../component/SellerOrdersCard';
+import { getAll } from '../../services/sales';
 
 export default function SellerOrders() {
   const [sales, setSales] = useState([]);
+  const [user] = useState(() => JSON.parse(localStorage.getItem('user')));
 
   useEffect(() => {
-    const allSales = async () => {
-      const getSales = await allSales();
-      setSales(getSales);
-    };
-    allSales();
-  }, []);
+    getAll(user.id)
+      .then((data) => setSales(data.data));
+  }, [user.id]);
 
   return (
     <>
-      <Header />
-      {sales.map((sale, i) => (
+      <SellerHeader />
+      { sales.length !== 0 && sales.map((sale, i) => (
         <SellerOrdersCard sale={ sale } key={ i } />
       ))}
     </>

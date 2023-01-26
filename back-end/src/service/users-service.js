@@ -9,13 +9,13 @@ const login = async (body) => {
 
   if (!user) throw new HttpException(404, 'User not found');
 
-  const { name, password: pwd, role } = user;
+  const { name, password: pwd, role, id } = user;
   const md5Pwd = md5(password);
 
   if (md5Pwd === pwd) {
-    const token = jwtSign({ name, email, role });
+    const token = jwtSign({ name, email, role, id });
 
-    return { name, email, role, token };
+    return { name, email, role, token, id };
   }
 };
 
