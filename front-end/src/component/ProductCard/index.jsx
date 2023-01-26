@@ -15,13 +15,22 @@ function ProductCard({ product }) {
             ...cartProduct,
             price: product.price,
             id: product.id,
+            name: product.name,
             quantity,
           };
         }
         return cartProduct;
-      }).filter((element) => element.quantity > 0)
-      : [...cart, { price: product.price, id: product.id, quantity }];
-    setCart(newCart);
+      })
+      : [
+        ...cart, {
+          price: product.price,
+          id: product.id,
+          name: product.name,
+          quantity,
+        },
+      ];
+
+    setCart(newCart.filter((element) => element.quantity > 0));
   };
 
   useEffect(() => {
@@ -60,7 +69,7 @@ function ProductCard({ product }) {
             type="number"
             value={ quantity }
             onFocus={ (event) => event.target.select() }
-            onChange={ ({ target }) => setQuantity(target.value) }
+            onChange={ ({ target }) => setQuantity(Number(target.value)) }
           />
           <button
             type="button"
