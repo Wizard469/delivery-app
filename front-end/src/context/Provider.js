@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import Context from './Context';
+import Context from './SellerContext';
 
 function Provider({ children }) {
   const [user, setUser] = useState({});

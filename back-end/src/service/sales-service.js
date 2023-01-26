@@ -8,9 +8,8 @@ const { Sale } = require('../database/models');
 // const productid = 'product_id';
 // const saleid = 'sale_id';
 
-const getAll = async () => {
-  const allSales = await Sale.findAll();
-
+const getAll = async (sellerId) => {
+  const allSales = await Sale.findAll({ where: { sellerId } });
   return allSales;
 };
 
