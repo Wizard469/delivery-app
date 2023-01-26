@@ -6,7 +6,6 @@ function Provider({ children }) {
   const [user, setUser] = useState({});
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [sales, setSales] = useState([]);
 
   const setLocalStorage = (key, info) => {
     localStorage.setItem(key, JSON.stringify(info));
