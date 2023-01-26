@@ -3,15 +3,16 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../component/Header';
 import ProductCard from '../../component/ProductCard';
 import CartContext from '../../context/CartContext';
+import usePersistedState from '../../hooks/use-persisted-state';
 
 function Products() {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = usePersistedState('cart');
   const history = useHistory();
 
   const context = useMemo(() => ({
     cart, setCart,
-  }), [cart]);
+  }), [cart, setCart]);
 
   const totalPrice = cart.reduce((acc, cur) => {
     const sum = acc + (cur.quantity * cur.price);
