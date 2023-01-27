@@ -5,10 +5,11 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const SECRET_KEY = 'superDuperSecretKey';
+const jwtKey = require('fs')
+  .readFileSync('./jwt.evaluation.key', { encoding: 'utf-8' });
 
-const jwtSign = (payload) => sign(payload, SECRET_KEY, jwtConfig);
+const jwtSign = (payload) => sign(payload, jwtKey, jwtConfig);
 
-const jwtVerify = (token) => verify(token, SECRET_KEY);
+const jwtVerify = (token) => verify(token, jwtKey);
 
 module.exports = { jwtSign, jwtVerify };

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header/index';
-import newUserValidation from '../../utils/newUserValidation';
 import './Header/styles.css';
 import NewUser from '../../services/admin';
 

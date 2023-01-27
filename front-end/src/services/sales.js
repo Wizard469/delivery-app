@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const api = axios.create({ baseURL: 'http://localhost:3001' });
 
-export async function getAll(sales) {
+export async function getAll(sellerId) {
   try {
-    const response = await api.get('/sales', sales);
+    const response = await api.get(`sales/orders/${sellerId}`);
     return response;
   } catch (error) {
     return error.stack;
@@ -20,6 +20,13 @@ export async function saleById(id) {
   }
 }
 
-export default {
-  getAll, saleById,
-};
+export async function createSale(order) {
+  try {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const response = await api
+      .post('sales', order, { headers: { Authorization: token } });
+    return response.data;
+  } catch (error) {
+    return error.stack;
+  }
+}
