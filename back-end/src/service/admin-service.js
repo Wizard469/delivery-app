@@ -7,7 +7,7 @@ const createNewUser = async (newUser) => {
   const verifyEmail = await User.findOne({ where: { email } });
 
   if (verifyEmail || verifyName) {
-   throw HttpException(409, 'User already registered');
+    throw HttpException(409, 'User already registered');
   }
   const createUser = await User.create({ name, email, password, role });
   return createUser;

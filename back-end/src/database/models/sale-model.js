@@ -1,3 +1,5 @@
+const { NOW } = require("sequelize");
+
 const SaleModel = (sequelize, DataTypes) => {
   const Sale = sequelize.define(
     'Sale', {
@@ -45,10 +47,11 @@ const SaleModel = (sequelize, DataTypes) => {
       },
       saleDate: {
         type: DataTypes.DATE,
-        defaultValue: sequelize.fn('NOW')
+        defaultValue: NOW()
       },
       status: {
         type: DataTypes.STRING,
+        defaultValue: 'Pendente',
         allowNull: false
       },
     },
