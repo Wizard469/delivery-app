@@ -1,7 +1,6 @@
-const { User } = require('../database/models');
 const md5 = require('md5');
+const { User } = require('../database/models');
 const HttpException = require('../utils/error/httpException');
-
 
 const createNewUser = async (newUser) => {
   const { name, email, password, role } = newUser; 
