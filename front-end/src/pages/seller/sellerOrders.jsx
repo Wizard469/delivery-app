@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SellerHeader from '../../component/SellerHeader.jsx';
+import SellerHeader from '../../component/SellerHeader';
 import SellerOrdersCard from '../../component/SellerOrdersCard';
 import { getAll } from '../../services/sales';
 

@@ -1,9 +1,9 @@
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
 import React from 'react';
 
-function SellerOrdersCard({
+function SellerOrdersCard({ sale: {
   saleId,
   order,
   status,
@@ -11,7 +11,7 @@ function SellerOrdersCard({
   totalPrice,
   deliveryAddress,
   deliveryNumber,
-}) {
+} }) {
   const history = useHistory();
 
   let statusUpdate = '';
@@ -42,7 +42,7 @@ function SellerOrdersCard({
       aria-hidden="true"
     >
       <div className="seller-info">
-        <h3 className="order-title">{`Pedido ${order}`}</h3>
+        <h3 className="order-title">{ `Pedido ${order}` }</h3>
       </div>
 
       <div>
@@ -72,7 +72,7 @@ function SellerOrdersCard({
           <p
             data-testid={ `seller_orders__element-card-price-${saleId}` }
           >
-            {`R$ ${totalPrice.replace(/\./, ',')}`}
+            {totalPrice.replace(/\./, ',')}
           </p>
         </ul>
         <p

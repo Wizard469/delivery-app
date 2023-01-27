@@ -5,6 +5,7 @@ import './styles.css';
 function Header() {
   const history = useHistory();
   const [user] = useState(() => JSON.parse(localStorage.getItem('user')));
+
   return (
     <header className="Header">
       <Link
