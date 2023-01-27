@@ -5,7 +5,7 @@ const authMiddleware = (req, res, next) => {
   if (authorization) {
     try {
       jwtVerify(authorization);
-
+      
       return next();
     } catch (error) {
       res.status(403).json({ message: 'Invalid Token' });
