@@ -36,8 +36,16 @@ const getAll = async (sellerId) => {
 // };
 
 const saleId = async (id) => {
-  const { dataValues: saleById } = await Sale.findById(id);
-  return saleById;
+  const detail = await Sale.findOne({
+    where: { id },
+    include: [{
+      model: Product,
+      as: 'orders',
+      attributes: ['id', 'name', 'price'],
+      through: { attributes: ['quantity'], as: 'salesProduct' },
+    }],
+  });
+  return detail;
 };
 
 module.exports = {
