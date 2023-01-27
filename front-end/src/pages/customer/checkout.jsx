@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import usePersistedState from '../../hooks/use-persisted-state';
+import { createSale } from '../../services/sales';
 
 const tableHeaders = [
   'Item',
@@ -14,16 +16,35 @@ const getSubTotal = (price, quantity) => (price * quantity).toFixed(2).replace('
 const testIdPrefix = 'customer_checkout__element-order';
 
 export default function Checkout() {
+  const history = useHistory();
   const [cart, setCart] = usePersistedState('cart');
+  const totalPrice = cart.reduce((acc, cur) => {
+    const sum = acc + (cur.quantity * cur.price);
+    return sum;
+  }, 0);
+  const [order, setOrder] = useState(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    return {
+      userId: user.id,
+      sellerId: null,
+      deliveryAddress: '',
+      deliveryNumber: '',
+    };
+  });
+
+  const [sellers, setSellers] = useState([]);
+
   const updateCart = (productId) => {
     const updatedCart = cart.filter(({ id }) => id !== productId);
     setCart(updatedCart);
   };
 
-  const totalPrice = cart.reduce((acc, cur) => {
-    const sum = acc + (cur.quantity * cur.price);
-    return sum;
-  }, 0);
+  useEffect(() => {
+    fetch('http://localhost:3001/users/sellers')
+      .then((response) => response.json())
+      .then((data) => setSellers(data));
+  }, []);
 
   return (
     <div className="checkout">
@@ -85,26 +106,39 @@ export default function Checkout() {
             name="seller"
             id="seller"
             data-testid="customer_checkout__select-seller"
+            onChange={ (e) => setOrder({ ...order, sellerId: e.target.value }) }
           >
-            <option value="----" disabled>Selecione o Vendedor</option>
-            <option value="sellerId">SellerName</option>
+            <option value="----" disabled selected>Selecione o Vendedor</option>
+            {sellers.length && sellers.map((el) => (
+              <option value={ el.id } key={ el.id }>{el.name}</option>
+            ))}
           </select>
           <input
             type="text"
             id="address"
             placeholder="Informe seu endereço, sem numero..."
             data-testid="customer_checkout__input-address"
+            onChange={ (e) => setOrder({ ...order, deliveryAddress: e.target.value }) }
           />
           <input
             type="text"
             id="address-number"
             placeholder="Informe o número"
             data-testid="customer_checkout__input-address-number"
+            onChange={ (e) => setOrder({ ...order, deliveryNumber: e.target.value }) }
           />
         </form>
         <button
           type="button"
           data-testid="customer_checkout__button-submit-order"
+          onClick={ async () => {
+            const sale = await createSale({
+              ...order,
+              products: cart,
+              totalPrice,
+            });
+            history.push(`/customer/orders/${sale.id}`);
+          } }
         >
           Finalizar Pedido
         </button>

@@ -19,3 +19,14 @@ export async function saleById(id) {
     return error.stack;
   }
 }
+
+export async function createSale(order) {
+  try {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const response = await api
+      .post('sales', order, { headers: { Authorization: token } });
+    return response.data;
+  } catch (error) {
+    return error.stack;
+  }
+}

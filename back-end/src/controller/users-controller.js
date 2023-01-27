@@ -20,7 +20,13 @@ const login = async (req, res, next) => {
   }
 };
 
+const getSellers = async (_req, res) => {
+  const payload = await usersService.getSellers();
+  res.status(200).json(payload);
+};
+
 module.exports = {
   create,
   login,
+  getSellers,
 };

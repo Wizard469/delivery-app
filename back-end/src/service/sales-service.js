@@ -1,16 +1,32 @@
-const { Sale } = require('../database/models');
-
-// const userId = 'user_id';
-// const sellerId = 'seller_id';
-// const totalprice = 'total_price';
-// const deliveryAddress = 'delivery_address';
-// const deliveryNumber = 'delivery_number';
-// const productid = 'product_id';
-// const saleid = 'sale_id';
+const { Sale, SaleProduct, sequelize } = require('../database/models');
 
 const getAll = async (sellerId) => {
   const allSales = await Sale.findAll({ where: { sellerId } });
   return allSales;
+};
+
+const add = async ({ userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products }) => {
+  const sale = await sequelize.transaction(async (tr) => {
+    const registeredSale = await Sale.create({
+      userId,
+      sellerId,
+      totalPrice,
+      deliveryAddress,
+      deliveryNumber,
+    }, { transaction: tr });
+
+    await Promise.all(products.map(async ({ id, quantity }) => {
+      await SaleProduct.create({
+        saleId: registeredSale.id,
+        productId: id,
+        quantity,
+      }, { transaction: tr });
+    }));
+
+    return registeredSale;
+  });
+
+  return sale;
 };
 
 // const newSale = async ({ sales, seller, user, address }) => {
@@ -41,5 +57,5 @@ const saleId = async (id) => {
 };
 
 module.exports = {
-  getAll, saleId,
+  getAll, saleId, add,
 };
