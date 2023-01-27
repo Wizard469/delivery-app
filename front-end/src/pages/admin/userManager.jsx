@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header/index';
 import './Header/styles.css';
 import NewUser from '../../services/admin';
+import newUserValidation from '../../utils/newUserValidation';
 
 export default function UserManager() {
   const [name, setName] = useState('');

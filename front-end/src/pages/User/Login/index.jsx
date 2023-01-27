@@ -33,8 +33,9 @@ export default function Login() {
 
       localStorage.setItem('user', JSON.stringify({ ...response }));
 
-      if (response.role === 'seller') history.push('/seller/orders');
-      if (response.role === 'customer') history.push('/customer/products');
+      if (response.role === 'seller') history.replace('/seller/orders');
+      if (response.role === 'administrator') history.replace('/admin/manage');
+      if (response.role === 'customer') history.replace('/customer/products');
     } catch (err) {
       setFailedLogin(true);
     }

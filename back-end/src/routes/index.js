@@ -2,7 +2,6 @@ const { Router } = require('express');
 const productsRouter = require('./products-route');
 const loginRouter = require('./login-route');
 const registerRouter = require('./register-route');
-const adminRouter = require('./adminRouter');
 const adminRouter = require('./admin-route');
 const salesRouter = require('./sales-route');
 
