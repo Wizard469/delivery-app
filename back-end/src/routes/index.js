@@ -12,5 +12,6 @@ routes.use('/register', registerRouter);
 routes.use('/products', productsRouter);
 routes.use('/admin/manage', adminRouter);
 routes.use('/sales', salesRouter);
+routes.use('/users', loginRouter);
 
 module.exports = routes;
