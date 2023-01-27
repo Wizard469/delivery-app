@@ -1,5 +1,6 @@
 const { User } = require('../database/models');
 const HttpException = require('../utils/error/httpException');
+const md5 = require('md5');
 
 const createNewUser = async (newUser) => {
   const { name, email, password, role } = newUser; 
@@ -10,7 +11,13 @@ const createNewUser = async (newUser) => {
   if (verifyEmail || verifyName) {
     throw HttpException(409, 'User already registered');
   }
-  const createUser = await User.create({ name, email, password, role });
+  const cryptPassword = md5(password);
+
+  if (role === 'vendedor'){
+    const createUser = await User.create({ name, email, password:cryptPassword, role: 'seller' });
+    return createUser;
+  }
+  const createUser = await User.create({ name, email, password:cryptPassword, role });
   return createUser;
 };
 

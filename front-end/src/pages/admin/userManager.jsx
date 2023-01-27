@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './Header/index';
 import './Header/styles.css';
 import NewUser from '../../services/admin';
-import newUserValidation from '../../utils/newUserValidation';
+import registerValidation from '../../utils/registerValidation';
 
 export default function UserManager() {
   const [name, setName] = useState('');
@@ -13,17 +13,18 @@ export default function UserManager() {
   const [failedRegister, setFailedRegister] = useState(false);
 
   useEffect(() => {
-    if (newUserValidation(email, password)) {
+    if (registerValidation(name, email, password)) {
       setIsRegisterBtnDisabled(false);
     } else setIsRegisterBtnDisabled(true);
-  }, [email, password, role]);
+  }, [name, email, password]);
 
   const checkNewUser = async () => {
     console.log({ name, email, password, role });
     const response = await NewUser({ name, email, password, role });
     if ('message' in response) {
-      setFailedRegister(true);
+      return setFailedRegister(true);
     }
+    return setFailedRegister(false);
   };
 
   return (
