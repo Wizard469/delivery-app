@@ -4,7 +4,7 @@ import './styles.css';
 import React from 'react';
 
 function SellerOrdersCard({ sale: {
-  saleId,
+  id,
   order,
   status,
   saleDate,
@@ -37,18 +37,18 @@ function SellerOrdersCard({ sale: {
   return (
     <div
       className="seller-order-card-container"
-      data-testid={ `seller_orders__element-order-id-${saleId}` }
-      onClick={ () => onClick(saleId) }
+      data-testid={ `seller_orders__element-order-id-${id}` }
+      onClick={ () => onClick(id) }
       aria-hidden="true"
     >
       <div className="seller-info">
-        <h3 className="order-title">{ `Pedido ${order}` }</h3>
+        <h3 className="order-title">{`Pedido ${id}`}</h3>
       </div>
 
       <div>
         <div
           className={ `seller-order-status-${statusUpdate}` }
-          data-testid={ `seller_orders__element-delivery-status-${saleId}` }
+          data-testid={ `seller_orders__element-delivery-status-${id}` }
         >
           {status}
         </div>
@@ -58,26 +58,25 @@ function SellerOrdersCard({ sale: {
         <ul className="seller_orders_list">
           <li
             className="seller_orders_li"
-            data-testid={ `seller_orders__element-order-date-${saleId}` }
+            data-testid={ `seller_orders__element-order-date-${id}` }
           >
             {handleDate(saleDate)}
           </li>
           <li
             className="seller_orders_li"
           >
-            R$
-            {' '}
-            {' '}
+            <p
+              data-testid={ `seller_orders__element-card-price-${id}` }
+            >
+              R$
+              {' '}
+              {totalPrice.replace(/\./, ',')}
+            </p>
           </li>
-          <p
-            data-testid={ `seller_orders__element-card-price-${saleId}` }
-          >
-            {totalPrice.replace(/\./, ',')}
-          </p>
         </ul>
         <p
           className="seller_orders_adress"
-          data-testid={ `seller_orders__element-card-address-${saleId}` }
+          data-testid={ `seller_orders__element-card-address-${id}` }
         >
           {`Endereço: ${deliveryAddress}, ${deliveryNumber}`}
         </p>
