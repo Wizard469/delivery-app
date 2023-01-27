@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header/index';
-import newUserValidation from '../../utils/newUserValidation';
 import './Header/styles.css';
+import registerValidation from '../../utils/registerValidation';
 
 export default function UserManager() {
   const [name, setName] = useState('');
@@ -12,9 +12,9 @@ export default function UserManager() {
   const [failedRegister] = useState(false);
 
   useEffect(() => {
-    if (newUserValidation(email, password, roleSelected)) setIsRegisterBtnDisabled(false);
+    if (registerValidation(name, email, password)) setIsRegisterBtnDisabled(false);
     else setIsRegisterBtnDisabled(true);
-  }, [email, password, roleSelected]);
+  }, [name, email, password]);
 
   return (
     <div>

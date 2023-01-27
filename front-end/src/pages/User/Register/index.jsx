@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import postRequest from '../../../services/userApi';
 import registerValidation from '../../../utils/registerValidation';
 
 export default function Register() {
@@ -42,8 +43,8 @@ export default function Register() {
 
   return (
     <section>
+      <h1>Cadastro</h1>
       <form>
-        <h1>Cadastro</h1>
         <input
           type="text"
           data-testid="common_register__input-name"
