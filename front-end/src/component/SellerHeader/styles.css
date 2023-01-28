@@ -1,0 +1,10 @@
+.SellerHeader {
+  display: flex;
+  gap: 5px;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.SellerHeader button {
+  padding: 10px;
+}

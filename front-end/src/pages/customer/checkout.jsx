@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import usePersistedState from '../../hooks/use-persisted-state';
 import { createSale } from '../../services/sales';
+import Header from '../../component/Header/index';
 
 const tableHeaders = [
   'Item',
@@ -48,6 +49,7 @@ export default function Checkout() {
 
   return (
     <div className="checkout">
+      <Header />
       <h2>Finalizar Pedido</h2>
       <div className="sale-products-info">
         <table>

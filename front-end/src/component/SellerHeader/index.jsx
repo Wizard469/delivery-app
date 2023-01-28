@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import './styles.css';
 
 function SellerHeader() {
   const history = useHistory();
   const [user] = useState(() => JSON.parse(localStorage.getItem('user')));
   return (
-    <header className="Header">
+    <header className="SellerHeader">
       <Link
         to="/seller/orders"
         data-testid="customer_products__element-navbar-link-orders"
