@@ -19,8 +19,9 @@ export default function UserManager() {
   }, [name, email, password]);
 
   const checkNewUser = async () => {
-    console.log({ name, email, password, role });
+    console.log('front:', { name, email, password, role });
     const response = await NewUser({ name, email, password, role });
+    console.log(response, 'teste');
     if ('message' in response) {
       return setFailedRegister(true);
     }
