@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Login from './pages/User/Login';
 import Products from './pages/customer/products';
-import UserManager from './pages/Admin/userManager';
+import UserManager from './pages/admin/userManager';
 import SellerOrders from './pages/seller/sellerOrders';
 import Checkout from './pages/customer/checkout';
 import Register from './pages/User/Register';

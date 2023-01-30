@@ -1,20 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import Header from './Header/index';
 import './Header/styles.css';
+import NewUser from '../../services/admin';
 import registerValidation from '../../utils/registerValidation';
 
 export default function UserManager() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [roleSelected, setRoleSelected] = useState('vendedor');
+  const [role, setRole] = useState('vendedor');
   const [isRegisterBtnDisabled, setIsRegisterBtnDisabled] = useState(true);
-  const [failedRegister] = useState(false);
+  const [failedRegister, setFailedRegister] = useState(false);
 
   useEffect(() => {
-    if (registerValidation(name, email, password)) setIsRegisterBtnDisabled(false);
-    else setIsRegisterBtnDisabled(true);
+    if (registerValidation(name, email, password)) {
+      setIsRegisterBtnDisabled(false);
+    } else setIsRegisterBtnDisabled(true);
   }, [name, email, password]);
+
+  const checkNewUser = async () => {
+    console.log('front:', { name, email, password, role });
+    const response = await NewUser({ name, email, password, role });
+    console.log(response, 'teste');
+    if ('message' in response) {
+      return setFailedRegister(true);
+    }
+    return setFailedRegister(false);
+  };
 
   return (
     <div>
@@ -59,8 +71,8 @@ export default function UserManager() {
           <select
             name="select-role"
             data-testid="admin_manage__select-role"
-            value={ roleSelected }
-            onChange={ (e) => setRoleSelected(e.target.value) }
+            value={ role }
+            onChange={ (e) => setRole(e.target.value) }
           >
             <option value="seller">Vendedor</option>
             <option value="customer">Cliente</option>
@@ -70,6 +82,7 @@ export default function UserManager() {
             type="button"
             data-testid="admin_manage__button-register"
             disabled={ isRegisterBtnDisabled }
+            onClick={ checkNewUser }
           >
             Cadastrar
           </button>
