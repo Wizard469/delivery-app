@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Header from '../../component/Header';
 
 export default function Order() {
+  const { id } = useParams();
+  const [sale, setSale] = useState([]);
+  console.log(sale);
+  useEffect(() => {
+    fetch(`http://localhost:3001/sales/${id}`).then((response) => response.json()).then((data) => setSale(data));
+  }, []);
+
   return (
     <div>
       <Header />
