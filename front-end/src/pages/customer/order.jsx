@@ -16,11 +16,7 @@ const testIdPrefix = 'customer_order_details__element-order';
 export default function Order() {
   const { id } = useParams();
   const [sale, setSale] = useState({});
-  const totalPrice = sale.products && sale.products.reduce((acc, cur) => {
-    const sum = acc + (cur.SaleProduct.quantity * cur.price);
-    return sum;
-  }, 0);
-  console.log(totalPrice);
+
   useEffect(() => {
     fetch(`http://localhost:3001/sales/${id}`).then((response) => response.json()).then((data) => setSale(data));
   }, []);
@@ -36,7 +32,7 @@ export default function Order() {
               {`PEDIDO ${sale.id} | `}
             </span>
             <span data-testid={ `${testIdPrefix}-details-label-seller-name` }>
-              {`P. Vend: ${sale.sellerId} | `}
+              {`P. Vend: ${sale.seller.name} | `}
             </span>
             <span data-testid={ `${testIdPrefix}-details-label-order-date` }>
               {`${new Date(sale.saleDate).toLocaleDateString('pt-BR')} | `}
@@ -89,7 +85,7 @@ export default function Order() {
           </tbody>
         </table>
         <p data-testid={ `${testIdPrefix}-total-price` }>
-          {sale.id && `Total: R$ ${totalPrice.toFixed(2).replace('.', ',')}`}
+          {sale.id && `Total: R$ ${sale.totalPrice}`}
         </p>
       </div>
     </div>

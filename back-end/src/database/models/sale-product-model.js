@@ -3,7 +3,6 @@ const SaleProductModel = (sequelize, DataTypes) => {
     'SaleProduct',
     {
       saleId: {
-        primaryKey: true,
         type: DataTypes.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
@@ -15,7 +14,6 @@ const SaleProductModel = (sequelize, DataTypes) => {
         },
       },
       productId: {
-        primaryKey: true,
         type: DataTypes.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
