@@ -7,6 +7,7 @@ import SellerOrders from './pages/seller/sellerOrders';
 import Checkout from './pages/customer/checkout';
 import Register from './pages/User/Register';
 import Order from './pages/customer/order';
+import SellerOrdersDetails from './pages/seller/sellerOrdersDetails';
 
 export default function Routes() {
   return (
@@ -21,6 +22,7 @@ export default function Routes() {
       <Route path="/customer/orders/:id" component={ Order } />
       <Route path="/admin/manage" component={ UserManager } />
       <Route path="/seller/orders" component={ SellerOrders } />
+      <Route path="/seller/orders/:id" component={ SellerOrdersDetails } />
     </Switch>
   );
 }
