@@ -43,7 +43,7 @@ const saleId = async (id) => {
 };
 
 const getById = async (id) => {
-  const detail = await Sale.findAll({
+  const detail = await Sale.findOne({
     where: { id },
     include: [{
       model: Product,
