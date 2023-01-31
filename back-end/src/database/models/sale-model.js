@@ -1,5 +1,4 @@
 const { NOW } = require("sequelize");
-const {SaleProduct} = require('./index')
 
 const SaleModel = (sequelize, DataTypes) => {
   const Sale = sequelize.define(
