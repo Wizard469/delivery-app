@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import SellerHeader from '../../component/SellerHeader';
+import { saleById } from '../../services/sales';
 
 function SellerOrdersDetails() {
+  useEffect(() => {
+    saleById();
+  }, []);
+
   return (
     <div>
       <SellerHeader />
