@@ -25,6 +25,8 @@ export async function createSale(order) {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const response = await api
       .post('sales', order, { headers: { Authorization: token } });
+
+    localStorage.removeItem('cart');
     return response.data;
   } catch (error) {
     return error.stack;

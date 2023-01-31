@@ -8,9 +8,7 @@ const router = Router();
 // router.post('/', controller.newSale);
 
 router.get('/orders/:sellerId', controller.getAll);
-
-router.get('/:id', controller.saleId);
-
+router.get('/:id', controller.getById);
 router.post('/', authMiddleware, checkoutController.addSale);
 
 module.exports = router;
