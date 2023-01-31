@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 import './styles.css';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 function SellerOrdersCard({ sale: {
   id,
-  // order,
   status,
   saleDate,
   totalPrice,
   deliveryAddress,
   deliveryNumber,
 } }) {
-  // const history = useHistory();
+  const history = useHistory();
 
   let statusUpdate = '';
   if (status === 'Preparando') {
@@ -21,9 +21,9 @@ function SellerOrdersCard({ sale: {
     statusUpdate = 'seller-order-status-entregue';
   }
 
-  // const onClick = (value) => {
-  //   history.push(`/seller/orders/${value}`);
-  // };
+  const onClick = (value) => {
+    history.push(`/seller/orders/${value}`);
+  };
 
   const handleDate = (date) => {
     const dateObj = new Date(date);
@@ -31,8 +31,8 @@ function SellerOrdersCard({ sale: {
   };
 
   return (
-    <a
-      href={ `/seller/orders/${id}` }
+    <div
+      onClick={ () => onClick(id) }
       className="seller-order-card-container"
       data-testid={ `seller_orders__element-order-id-${id}` }
       aria-hidden="true"
@@ -77,7 +77,7 @@ function SellerOrdersCard({ sale: {
           {`Endereço: ${deliveryAddress}, ${deliveryNumber}`}
         </p>
       </div>
-    </a>
+    </div>
   );
 }
 

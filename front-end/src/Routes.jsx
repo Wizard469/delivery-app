@@ -21,8 +21,8 @@ export default function Routes() {
       <Route path="/customer/checkout" component={ Checkout } />
       <Route path="/customer/orders/:id" component={ Order } />
       <Route path="/admin/manage" component={ UserManager } />
-      <Route path="/seller/orders" component={ SellerOrders } />
       <Route path="/seller/orders/:id" component={ SellerOrdersDetails } />
+      <Route path="/seller/orders" component={ SellerOrders } />
     </Switch>
   );
 }
