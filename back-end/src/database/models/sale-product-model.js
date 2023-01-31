@@ -3,7 +3,6 @@ const SaleProductModel = (sequelize, DataTypes) => {
     'SaleProduct',
     {
       saleId: {
-        primaryKey: true,
         type: DataTypes.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
@@ -15,7 +14,6 @@ const SaleProductModel = (sequelize, DataTypes) => {
         },
       },
       productId: {
-        primaryKey: true,
         type: DataTypes.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
@@ -42,19 +40,17 @@ const SaleProductModel = (sequelize, DataTypes) => {
     models.Sale.belongsToMany(
       models.Product,
       {
-        foreignKey: 'productId',
+        foreignKey: 'saleId',
         as: 'products',
         through: SaleProduct,
-        otherKey: 'saleId'
       },
     );
     models.Product.belongsToMany(
       models.Sale,
       {
-        foreignKey: 'saleId',
+        foreignKey: 'productId',
         as: 'sales',
         through: SaleProduct,
-        otherKey: 'productId'
       },
     );
   }

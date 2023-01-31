@@ -4,7 +4,6 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     await queryInterface.createTable('sales_products', {
       saleId: {
-        primaryKey: true,
         type: Sequelize.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
@@ -16,7 +15,6 @@ module.exports = {
         },
       },
       productId: {
-        primaryKey: true,
         type: Sequelize.INTEGER,
         allowNull: false,
         onUpdate: 'CASCADE',
