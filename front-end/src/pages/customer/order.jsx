@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import Header from '../../component/Header';
 
 const tableHeaders = [
@@ -43,6 +43,7 @@ export default function Order() {
             <button
               type="button"
               data-testid="customer_order_details__button-delivery-check"
+              disabled
             >
               Marcar como entregue
             </button>
@@ -85,7 +86,7 @@ export default function Order() {
           </tbody>
         </table>
         <p data-testid={ `${testIdPrefix}-total-price` }>
-          {sale.id && `Total: R$ ${sale.totalPrice}`}
+          {sale.id && `${sale.totalPrice.replace('.', ',')}`}
         </p>
       </div>
     </div>

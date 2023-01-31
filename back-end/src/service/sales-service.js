@@ -29,19 +29,6 @@ const add = async ({ userId, sellerId, totalPrice, deliveryAddress, deliveryNumb
   return sale;
 };
 
-const saleId = async (id) => {
-  const detail = await Sale.findOne({
-    where: { id },
-    include: [{
-      model: SaleProduct,
-      as: 'orders',
-      attributes: ['id', 'name', 'price'],
-      through: { attributes: ['quantity'], as: 'salesProduct' },
-    }],
-  });
-  return detail;
-};
-
 const getById = async (id) => {
   const detail = await Sale.findOne({
     where: { id },
@@ -59,5 +46,5 @@ const getById = async (id) => {
 };
 
 module.exports = {
-  getAll, saleId, add, getById,
+  getAll, add, getById,
 };
