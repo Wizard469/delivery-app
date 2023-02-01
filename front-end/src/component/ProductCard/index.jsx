@@ -39,10 +39,13 @@ function ProductCard({ product }) {
 
   return (
     <div className="ProductCard">
-      <div className="img-container">
+      <p className="product-price">
+        <span>R$</span>
         <span data-testid={ `customer_products__element-card-price-${product.id}` }>
           { product.price.replace('.', ',') }
         </span>
+      </p>
+      <div className="img-container">
         <img
           src={ product.urlImage }
           alt="produto logo"

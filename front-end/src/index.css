@@ -1,5 +1,19 @@
+:root {
+
+  --red: #d01800;
+
+  --yellow: #fdb833;
+
+  --green: #70ae6e;
+
+  --black: #222121;
+
+  --white: whitesmoke;
+}
+
 body {
-  font-family: -apple-system , Roboto , Oxygen , Cantarell , Droid Sans , sans-serif;
+  background: var(--white);
+  font-family: Roboto , sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -17,4 +31,9 @@ code {
 a {
   color: inherit;
   text-decoration: inherit;
+}
+
+::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
 }
