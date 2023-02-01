@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import postRequest from '../../../services/userApi';
 import loginValidation from '../../../utils/loginValidation';
+import './style.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -42,15 +43,16 @@ export default function Login() {
   };
 
   return (
-    <section>
-      <form>
-        <h1>{'<Nome do seu app>'}</h1>
+    <section className="main-section">
+      <form className="login-form">
+        <h1>Booze Buddy</h1>
         <input
           type="email"
           data-testid="common_login__input-email"
           onChange={ ({ target: { value } }) => setEmail(value) }
           placeholder="seu-email@site.com"
           value={ email }
+          onClick={ () => setFailedLogin(false) }
         />
         <input
           type="password"
@@ -58,8 +60,10 @@ export default function Login() {
           onChange={ ({ target: { value } }) => setPassword(value) }
           placeholder="Sua senha"
           value={ password }
+          onClick={ () => setFailedLogin(false) }
         />
         <button
+          className="login-btn"
           type="button"
           data-testid="common_login__button-login"
           disabled={ isLoginBtnDisabled }
@@ -68,24 +72,24 @@ export default function Login() {
           LOGIN
         </button>
         <button
+          className="new-user-btn"
           type="button"
           data-testid="common_login__button-register"
           onClick={ () => history.push('/register') }
         >
           Ainda não tenho conta
         </button>
-      </form>
-
-      {
-        (failedLogin)
+        {
+          (failedLogin)
         && (
-          <p data-testid="common_login__element-invalid-email">
+          <p className="error-msg" data-testid="common_login__element-invalid-email">
             O endereço de e-mail ou a senha não estão corretos.
             <br />
             Por favor, tente novamente.
           </p>
         )
-      }
+        }
+      </form>
     </section>
   );
 }

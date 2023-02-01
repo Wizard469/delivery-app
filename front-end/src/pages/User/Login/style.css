@@ -1,0 +1,80 @@
+html, body {
+  background-color: rgb(234, 230, 230);
+  height: 100%;
+  margin: 0;
+}
+
+.login-form {
+  align-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px silver;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  height: 23em;
+  left: 50%;
+  margin-right: -50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 25em;
+}
+
+.login-form input {
+  background-color: rgb(249, 248, 252);
+  border: 0;
+  border-radius: 5px;
+  color: rgb(40, 40, 40);
+  padding: 5px;
+  text-align: center;
+}
+
+.login-form input:focus {
+  border-color: #719ece;
+  box-shadow: 0 0 5px #719ece;
+  outline: none;
+}
+
+.login-btn {
+  background-color: green;
+  border: 1px solid;
+  border-radius: 15px;
+  color: white;
+  padding: 5px 10px;
+}
+
+.login-btn:disabled, .login-btn[ disabled ] {
+  background-color: #ccc;
+  border: 1px solid #999;
+  color: #666;
+}
+
+.login-btn:hover {
+  background-color: rgb(7, 100, 7);
+}
+
+.login-btn:hover:disabled, .login-btn:hover[ disabled ] {
+  background-color: #ccc;
+}
+
+.new-user-btn {
+  background-color: white;
+  border: 0;
+  color: rgb(50, 50, 50);
+}
+
+.new-user-btn:hover {
+  color: rgb(139, 139, 139);
+}
+
+.login-form h1 {
+  color: rgb(50, 50, 50);
+  text-align: center;
+}
+
+.error-msg {
+  color: red;
+  text-align: center;
+}

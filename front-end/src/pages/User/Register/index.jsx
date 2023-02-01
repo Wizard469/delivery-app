@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import postRequest from '../../../services/userApi';
 import registerValidation from '../../../utils/registerValidation';
+import './style.css';
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -42,15 +43,16 @@ export default function Register() {
   };
 
   return (
-    <section>
-      <h1>Cadastro</h1>
-      <form>
+    <section className="main-section">
+      <form className="register-form">
+        <h1>Cadastro</h1>
         <input
           type="text"
           data-testid="common_register__input-name"
           onChange={ ({ target: { value } }) => setName(value) }
           placeholder="Seu nome"
           value={ name }
+          onClick={ () => setFailedRegister(false) }
         />
         <input
           type="email"
@@ -58,6 +60,7 @@ export default function Register() {
           onChange={ ({ target: { value } }) => setEmail(value) }
           placeholder="seu-email@site.com"
           value={ email }
+          onClick={ () => setFailedRegister(false) }
         />
         <input
           type="password"
@@ -67,6 +70,7 @@ export default function Register() {
           value={ password }
         />
         <button
+          className="register-btn"
           type="button"
           data-testid="common_register__button-register"
           disabled={ isRegisterBtnDisabled }
@@ -74,18 +78,20 @@ export default function Register() {
         >
           CADASTRAR
         </button>
-      </form>
-
-      {
-        (failedRegister)
+        {
+          (failedRegister)
         && (
-          <p data-testid="common_register__element-invalid_register">
+          <p
+            className="error-msg"
+            data-testid="common_register__element-invalid_register"
+          >
             Nome ou email já cadastrado.
             <br />
             Por favor, tente novamente.
           </p>
         )
-      }
+        }
+      </form>
     </section>
   );
 }
