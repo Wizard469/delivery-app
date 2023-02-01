@@ -1,11 +1,10 @@
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './styles.css';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 function SellerOrdersCard({ sale: {
   id,
-  order,
   status,
   saleDate,
   totalPrice,
@@ -23,10 +22,7 @@ function SellerOrdersCard({ sale: {
   }
 
   const onClick = (value) => {
-    history.push({
-      pathname: `/seller/orders/${value}`,
-      state: order,
-    });
+    history.push(`/seller/orders/${value}`);
   };
 
   const handleDate = (date) => {
@@ -36,9 +32,9 @@ function SellerOrdersCard({ sale: {
 
   return (
     <div
+      onClick={ () => onClick(id) }
       className="seller-order-card-container"
       data-testid={ `seller_orders__element-order-id-${id}` }
-      onClick={ () => onClick(id) }
       aria-hidden="true"
     >
       <div className="seller-info">
@@ -89,7 +85,7 @@ export default SellerOrdersCard;
 
 SellerOrdersCard.propTypes = {
   SellerOrdersCard: PropTypes.shape({
-    saleId: PropTypes.string,
+    id: PropTypes.string,
     order: PropTypes.string,
     status: PropTypes.string,
     saleDate: PropTypes.string,
