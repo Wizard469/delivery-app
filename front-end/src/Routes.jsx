@@ -8,6 +8,7 @@ import Checkout from './pages/customer/checkout';
 import Register from './pages/User/Register';
 import Order from './pages/customer/order';
 import MyOrders from './pages/customer/myOrders';
+import RedirectRouter from './component/RedirectRouter';
 
 export default function Routes() {
   return (
@@ -15,7 +16,11 @@ export default function Routes() {
       <Route exact path="/">
         <Redirect to="/login" />
       </Route>
-      <Route path="/login" component={ Login } />
+      <RedirectRouter
+        path="/login"
+      >
+        <Login />
+      </RedirectRouter>
       <Route path="/register" component={ Register } />
       <Route path="/customer/products" component={ Products } />
       <Route path="/customer/checkout" component={ Checkout } />
