@@ -16,9 +16,7 @@ export default function Routes() {
       <Route exact path="/">
         <Redirect to="/login" />
       </Route>
-      <RedirectRouter
-        path="/login"
-      >
+      <RedirectRouter path="/login">
         <Login />
       </RedirectRouter>
       <Route path="/register" component={ Register } />
