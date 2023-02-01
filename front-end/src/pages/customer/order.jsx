@@ -19,7 +19,7 @@ export default function Order() {
 
   useEffect(() => {
     fetch(`http://localhost:3001/sales/${id}`).then((response) => response.json()).then((data) => setSale(data));
-  }, []);
+  });
 
   return (
     <div>

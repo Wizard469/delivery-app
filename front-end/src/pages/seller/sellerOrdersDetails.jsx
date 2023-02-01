@@ -1,30 +1,42 @@
-import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import SellerHeader from '../../component/SellerHeader';
 import { saleById } from '../../services/sales';
 
 function SellerOrdersDetails() {
+  const { id } = useParams();
+  const [sale, setSale] = useState({});
+
+  const testIdPrefix = 'seller_order_details__element-order';
+
+  const getSubTotal = (price, quantity) => (price * quantity)
+    .toFixed(2).replace('.', ',');
+
   useEffect(() => {
-    saleById();
-  }, []);
+    saleById(id)
+      .then((data) => setSale(data.data));
+  }, [id]);
 
   return (
     <div>
       <SellerHeader />
-      <h1>Detalhes dos Pedidos</h1>
+      <h2>Detalhes dos Pedidos</h2>
       <div>
-        <p data-testid="seller_order_details__element-order-details-label-order-id">
-          Número do Pedido
+        <p
+          data-testid={ `${testIdPrefix}-details-label-order-id` }
+        >
+          {`PEDIDO ${sale.id} | `}
         </p>
 
-        <p data-testid="seller_order_details__element-order-details-label-order-date">
-          Date
+        <p data-testid={ `${testIdPrefix}-details-label-order-date` }>
+          {`${new Date(sale.saleDate).toLocaleDateString('pt-BR')} | `}
         </p>
 
         <p
-          data-testid="seller_order_details__element-order-details-label-delivery-status"
+          data-testid={ `${testIdPrefix}-details-label-delivery-status` }
         >
-          Status
+          {`${sale.status} | `}
         </p>
 
         <button
@@ -43,52 +55,54 @@ function SellerOrdersDetails() {
       </div>
 
       <table>
-        <tr>
+        <thead>
           <th>Item</th>
           <th>Descrição</th>
           <th>Quantidade</th>
           <th>Valor Unitário</th>
           <th>Sub-total</th>
-        </tr>
-        <tr>
-          <td
-            data-testid="seller_order_details__element-order-table-item-number-<id>"
-          >
-            Número
-          </td>
+        </thead>
+        <tbody>
+          { sale.products && sale.products.map((product, i) => (
+            <tr key={ product.id }>
+              <td
+                data-testid={ `${testIdPrefix}-table-item-number-${i}` }
+              >
+                {i + 1}
+              </td>
 
-          <td
-            data-testid="seller_order_details__element-order-table-name-<id>"
-          >
-            Name
-          </td>
+              <td
+                data-testid={ `${testIdPrefix}-table-name-${i}` }
+              >
+                {product.name}
+              </td>
 
-          <td
-            data-testid="seller_order_details__element-order-table-quantity-<id>"
-          >
-            Quantidade
-          </td>
+              <td
+                data-testid={ `${testIdPrefix}-table-quantity-${i}` }
+              >
+                {product.SaleProduct.quantity}
+              </td>
 
-          <td
-            data-testid="seller_order_details__element-order-table-unit-price-<id>"
+              <td
+                data-testid={ `${testIdPrefix}-table-unit-price-${i}` }
 
-          >
-            Preço
-          </td>
+              >
+                {product.price.replace('.', ',')}
+              </td>
 
-          <td
-            data-testid="seller_order_details__element-order-table-sub-total-<id>"
-          >
-            Subtotal
-          </td>
-        </tr>
+              <td
+                data-testid={ `${testIdPrefix}-table-sub-total-${i}` }
+              >
+                {getSubTotal(product.price, product.SaleProduct.quantity)}
+              </td>
+            </tr>
+          )) }
+        </tbody>
       </table>
 
-      <h2
-        data-testid="seller_order_details__element-order-total-price"
-      >
-        Total Price
-      </h2>
+      <p data-testid={ `${testIdPrefix}-total-price` }>
+        {sale.id && `${sale.totalPrice.replace('.', ',')}`}
+      </p>
     </div>
   );
 }
