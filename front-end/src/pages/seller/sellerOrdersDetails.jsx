@@ -49,6 +49,7 @@ function SellerOrdersDetails() {
         <button
           type="button"
           data-testid="seller_order_details__button-dispatch-check"
+          disabled
         >
           Saiu para a entrega
         </button>
