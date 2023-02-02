@@ -4,8 +4,14 @@ import CartContext from '../../context/CartContext';
 import './styles.css';
 
 function ProductCard({ product }) {
-  const [quantity, setQuantity] = useState(0);
   const { cart, setCart } = useContext(CartContext);
+
+  const [quantity, setQuantity] = useState(() => {
+    const productQuantity = cart.find(({ id }) => id === product.id);
+    if (productQuantity) return productQuantity.quantity;
+
+    return 0;
+  });
 
   const updateCart = () => {
     const newCart = cart.some((cartProduct) => product.id === cartProduct.id)

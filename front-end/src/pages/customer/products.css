@@ -25,5 +25,5 @@
 .button-cart:disabled {
   color: white;
   cursor: default;
-  opacity: 1;
+  opacity: 0.8;
 }

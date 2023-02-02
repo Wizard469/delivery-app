@@ -31,7 +31,7 @@ function Products() {
       <div className="Products">
         <Header />
         <div className="products-list">
-          {products.length && products.map((product) => (
+          {products.length !== 0 && products.map((product) => (
             <ProductCard key={ product.id } product={ product } />
           ))}
         </div>
@@ -42,7 +42,7 @@ function Products() {
           onClick={ () => history.push('/customer/checkout') }
           className="button-cart"
         >
-          <span>Ver Carrinho:</span>
+          <span>Ver Carrinho: R$</span>
           <span
             data-testid="customer_products__checkout-bottom-value"
           >
