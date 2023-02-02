@@ -5,6 +5,11 @@ const getAll = async (sellerId) => {
   return allSales;
 };
 
+const getAllByUserId = async (userId) => {
+  const response = await Sale.findAll({ where: { userId } });
+  return response;
+};
+
 const add = async ({ userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products }) => {
   const sale = await sequelize.transaction(async (tr) => {
     const registeredSale = await Sale.create({
@@ -48,12 +53,12 @@ const getById = async (id) => {
 const updateStatus = async (id, status) => {
   const newUpdate = await Sale.update({
   status,
-  },{
+  }, {
     where: { id },
   });
   return newUpdate;
 };
 
 module.exports = {
-  getAll, add, getById, updateStatus,
+  getAll, add, getById, getAllByUserId, updateStatus,
 };

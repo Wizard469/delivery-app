@@ -7,6 +7,7 @@ const router = Router();
 
 // router.post('/', controller.newSale);
 
+router.get('/customer/:userId', controller.getAllByUserId);
 router.get('/orders/:sellerId', controller.getAll);
 router.put('/orders/:sellerId', controller.updateStatus);
 router.get('/:id', controller.getById);
