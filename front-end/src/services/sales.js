@@ -32,3 +32,17 @@ export async function createSale(order) {
     return error.stack;
   }
 }
+
+export async function updateStatus(sellerId, status) {
+  console.log(status);
+  try {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const response = await api
+      .put(`sales/orders/${sellerId}`, { status,
+        headers: { Authorization: token } });
+
+    return response.data;
+  } catch (error) {
+    return error.stack;
+  }
+}

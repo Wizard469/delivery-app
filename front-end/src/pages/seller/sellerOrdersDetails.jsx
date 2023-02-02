@@ -2,21 +2,55 @@ import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import SellerHeader from '../../component/SellerHeader';
-import { saleById } from '../../services/sales';
+import { saleById, updateStatus } from '../../services/sales';
+
+const dispatch = 'Em Trânsito';
+const preparing = 'Preparando';
 
 function SellerOrdersDetails() {
   const { id } = useParams();
   const [sale, setSale] = useState({});
+  const [preparingButton, setpreparingButton] = useState(false);
+  const [dispatchButton, setdispatchButton] = useState(true);
 
   const testIdPrefix = 'seller_order_details__element-order';
 
   const getSubTotal = (price, quantity) => (price * quantity)
     .toFixed(2).replace('.', ',');
 
-  useEffect(() => {
-    saleById(id)
-      .then((data) => setSale(data.data));
-  }, [id]);
+  const changeStatus = async () => {
+    if (sale.status === 'Pendente') {
+      setSale({ ...sale, status: preparing });
+      setpreparingButton(true);
+      setdispatchButton(false);
+      await updateStatus(id, preparing);
+    }
+    if (sale.status === preparing) {
+      setSale({ ...sale, status: dispatch });
+      setpreparingButton(true);
+      setdispatchButton(true);
+      await updateStatus(id, dispatch);
+    }
+  };
+
+  useEffect(() => { // colocarum if com em transito
+    const carregaProduct = saleById(id)
+      .then((data) => {
+        const seila = (data.data);
+        setSale(seila);
+
+        console.log(carregaProduct);
+        if (seila.status === dispatch) {
+          setpreparingButton(true);
+          setdispatchButton(true);
+        }
+        if (seila.status === preparing) {
+          console.log('entrou preparing');
+          setpreparingButton(true);
+          setdispatchButton(false);
+        }
+      });
+  }, []);
 
   return (
     <div>
@@ -36,12 +70,14 @@ function SellerOrdersDetails() {
         <p
           data-testid={ `${testIdPrefix}-details-label-delivery-status` }
         >
-          {`${sale.status} | `}
+          {`${sale.status}`}
         </p>
 
         <button
           type="button"
           data-testid="seller_order_details__button-preparing-check"
+          onClick={ changeStatus }
+          disabled={ preparingButton }
         >
           Preparar pedido
         </button>
@@ -49,7 +85,8 @@ function SellerOrdersDetails() {
         <button
           type="button"
           data-testid="seller_order_details__button-dispatch-check"
-          disabled
+          onClick={ changeStatus }
+          disabled={ dispatchButton }
         >
           Saiu para a entrega
         </button>

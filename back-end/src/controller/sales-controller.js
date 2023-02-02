@@ -21,7 +21,16 @@ const getById = async (req, res, next) => {
     next(error);
   }
 };
+const updateStatus = async (req, res, next) => {
+  try {
+    const newStatus = await service.updateStatus(req.params.saleId, req.body.status);
+    
+    res.status(200).json(newStatus);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
-  getAll, getById, getAllByUserId,
+  getAll, getById, getAllByUserId, updateStatus,
 };
