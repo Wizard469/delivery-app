@@ -10,8 +10,8 @@ const preparing = 'Preparando';
 function SellerOrdersDetails() {
   const { id } = useParams();
   const [sale, setSale] = useState({});
-  const [preparingButton, setpreparingButton] = useState(false);
-  const [dispatchButton, setdispatchButton] = useState(true);
+  const [preparingButton, setPreparingButton] = useState(false);
+  const [dispatchButton, setDispatchButton] = useState(true);
 
   const testIdPrefix = 'seller_order_details__element-order';
 
@@ -21,33 +21,35 @@ function SellerOrdersDetails() {
   const changeStatus = async () => {
     if (sale.status === 'Pendente') {
       setSale({ ...sale, status: preparing });
-      setpreparingButton(true);
-      setdispatchButton(false);
+      setPreparingButton(true);
+      setDispatchButton(false);
       await updateStatus(id, preparing);
     }
     if (sale.status === preparing) {
       setSale({ ...sale, status: dispatch });
-      setpreparingButton(true);
-      setdispatchButton(true);
+      setPreparingButton(true);
+      setDispatchButton(true);
       await updateStatus(id, dispatch);
     }
   };
 
-  useEffect(() => { // colocarum if com em transito
-    const carregaProduct = saleById(id)
+  useEffect(() => {
+    saleById(id)
       .then((data) => {
-        const seila = (data.data);
-        setSale(seila);
+        const response = (data.data);
+        setSale(response);
 
-        console.log(carregaProduct);
-        if (seila.status === dispatch) {
-          setpreparingButton(true);
-          setdispatchButton(true);
+        if (response.status === dispatch) {
+          setPreparingButton(true);
+          setDispatchButton(true);
         }
-        if (seila.status === preparing) {
-          console.log('entrou preparing');
-          setpreparingButton(true);
-          setdispatchButton(false);
+        if (response.status === preparing) {
+          setPreparingButton(true);
+          setDispatchButton(false);
+        }
+        if (response.status === 'Entregue') {
+          setPreparingButton(true);
+          setDispatchButton(true);
         }
       });
   }, []);
