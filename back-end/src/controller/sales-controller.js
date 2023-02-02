@@ -15,7 +15,17 @@ const getById = async (req, res, next) => {
     next(error);
   }
 };
+const updateStatus = async (req, res, next) => {
+  try {
+    console.log(req.params.sellerId);
+    console.log(req.body.status);
+    const newStatus = await service.updateStatus(req.params.sellerId, req.body.status);
+    res.status(200).json(newStatus);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
-  getAll, getById,
+  getAll, getById, updateStatus
 };
