@@ -5,10 +5,10 @@
   padding: 10px;
 }
 
-label {
+.Header label {
   margin-right: 10px;
 }
 
-input {
+.Header input {
   margin-left: 10px;
 }

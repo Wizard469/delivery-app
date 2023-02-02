@@ -4,6 +4,7 @@ import Header from '../../component/Header';
 import ProductCard from '../../component/ProductCard';
 import CartContext from '../../context/CartContext';
 import usePersistedState from '../../hooks/use-persisted-state';
+import './products.css';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -29,8 +30,8 @@ function Products() {
     <CartContext.Provider value={ context }>
       <div className="Products">
         <Header />
-        <div>
-          {products.length && products.map((product) => (
+        <div className="products-list">
+          {products.length !== 0 && products.map((product) => (
             <ProductCard key={ product.id } product={ product } />
           ))}
         </div>
@@ -39,8 +40,9 @@ function Products() {
           data-testid="customer_products__button-cart"
           disabled={ totalPrice === 0 }
           onClick={ () => history.push('/customer/checkout') }
+          className="button-cart"
         >
-          <span>Ver Carrinho:</span>
+          <span>Ver Carrinho: R$</span>
           <span
             data-testid="customer_products__checkout-bottom-value"
           >

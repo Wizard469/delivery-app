@@ -1,0 +1,29 @@
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.button-cart {
+  background: var(--red);
+  border: none;
+  border-radius: 16px;
+  bottom: 50px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  gap: 10px;
+  padding: 20px;
+  position: fixed;
+  right: 50px;
+}
+
+.button-cart:disabled {
+  color: white;
+  cursor: default;
+  opacity: 0.8;
+}
