@@ -1,5 +1,4 @@
 .register-form {
-  align-content: center;
   align-items: center;
   background-color: white;
   border-radius: 10px;
@@ -16,16 +15,38 @@
   width: 25em;
 }
 
-.register-form input {
+.register-form .email-field, .name-field {
   background-color: rgb(249, 248, 252);
-  border: 0;
+  border: hidden;
   border-radius: 5px;
   color: rgb(40, 40, 40);
+  margin-left: 0;
   padding: 5px;
   text-align: center;
 }
 
-.register-form input:focus {
+.register-form .pwd-field {
+  align-items: center;
+  background-color: rgb(249, 248, 252);
+  border-radius: 5px;
+  color: rgb(40, 40, 40);
+  display: flex;
+  height: 16px;
+  justify-content: space-between;
+  padding: 5px;
+  width: 176px;
+}
+
+.register-form .pwd-field input {
+  background-color: transparent;
+  border: hidden;
+  height: 100%;
+  outline: none;
+  text-align: center;
+  width: 100%;
+}
+
+.register-form .name-field:focus, .email-field:focus, .pwd-field:focus-within {
   border-color: #719ece;
   box-shadow: 0 0 5px #719ece;
   outline: none;
@@ -55,5 +76,6 @@
 
 .register-form h1 {
   color: rgb(50, 50, 50);
+  padding: 1em;
   text-align: center;
 }

@@ -1,11 +1,15 @@
-html, body {
+* {
+  border: 0;
+  margin: 0;
+}
+
+.main-section {
   background-color: rgb(234, 230, 230);
-  height: 100%;
+  height: 100vh;
   margin: 0;
 }
 
 .login-form {
-  align-content: center;
   align-items: center;
   background-color: white;
   border-radius: 10px;
@@ -22,16 +26,38 @@ html, body {
   width: 25em;
 }
 
-.login-form input {
+.login-form .email-field {
   background-color: rgb(249, 248, 252);
-  border: 0;
+  border: hidden;
   border-radius: 5px;
   color: rgb(40, 40, 40);
+  margin-left: 0;
   padding: 5px;
   text-align: center;
 }
 
-.login-form input:focus {
+.login-form .pwd-field {
+  align-items: center;
+  background-color: rgb(249, 248, 252);
+  border-radius: 5px;
+  color: rgb(40, 40, 40);
+  display: flex;
+  height: 16px;
+  justify-content: space-between;
+  padding: 5px;
+  width: 176px;
+}
+
+.login-form .pwd-field input {
+  background-color: transparent;
+  border: hidden;
+  height: 100%;
+  outline: none;
+  text-align: center;
+  width: 100%;
+}
+
+.login-form .email-field:focus, .pwd-field:focus-within {
   border-color: #719ece;
   box-shadow: 0 0 5px #719ece;
   outline: none;
@@ -71,6 +97,7 @@ html, body {
 
 .login-form h1 {
   color: rgb(50, 50, 50);
+  padding: 1em;
   text-align: center;
 }
 

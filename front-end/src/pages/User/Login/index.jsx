@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Icon } from 'react-icons-kit';
+import { eye } from 'react-icons-kit/feather/eye';
+import { eyeOff } from 'react-icons-kit/feather/eyeOff';
 import postRequest from '../../../services/userApi';
 import loginValidation from '../../../utils/loginValidation';
+
 import './style.css';
 
 export default function Login() {
@@ -9,6 +13,8 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [isLoginBtnDisabled, setIsLoginBtnDisabled] = useState(true);
   const [failedLogin, setFailedLogin] = useState(false);
+  const [type, setType] = useState('password');
+  const [icon, setIcon] = useState(eyeOff);
 
   const history = useHistory();
 
@@ -26,6 +32,16 @@ export default function Login() {
       email,
       password,
     }),
+  };
+
+  const handleToggle = () => {
+    if (type === 'password') {
+      setIcon(eye);
+      setType('text');
+    } else {
+      setIcon(eyeOff);
+      setType('password');
+    }
   };
 
   const login = async () => {
@@ -47,6 +63,7 @@ export default function Login() {
       <form className="login-form">
         <h1>Booze Buddy</h1>
         <input
+          className="email-field"
           type="email"
           data-testid="common_login__input-email"
           onChange={ ({ target: { value } }) => setEmail(value) }
@@ -54,20 +71,28 @@ export default function Login() {
           value={ email }
           onClick={ () => setFailedLogin(false) }
         />
-        <input
-          type="password"
-          data-testid="common_login__input-password"
-          onChange={ ({ target: { value } }) => setPassword(value) }
-          placeholder="Sua senha"
-          value={ password }
-          onClick={ () => setFailedLogin(false) }
-        />
+        <div className="pwd-field">
+          <input
+            type={ type }
+            data-testid="common_login__input-password"
+            onChange={ ({ target: { value } }) => setPassword(value) }
+            placeholder="Sua senha"
+            value={ password }
+            onClick={ () => setFailedLogin(false) }
+          />
+          <span
+            role="presentation"
+            onClick={ handleToggle }
+          >
+            <Icon icon={ icon } size={ 15 } />
+          </span>
+        </div>
         <button
           className="login-btn"
           type="button"
           data-testid="common_login__button-login"
           disabled={ isLoginBtnDisabled }
-          onClick={ () => login() }
+          onClick={ login }
         >
           LOGIN
         </button>
