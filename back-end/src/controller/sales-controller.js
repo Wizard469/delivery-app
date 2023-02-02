@@ -23,9 +23,8 @@ const getById = async (req, res, next) => {
 };
 const updateStatus = async (req, res, next) => {
   try {
-    console.log(req.params.sellerId);
-    console.log(req.body.status);
-    const newStatus = await service.updateStatus(req.params.sellerId, req.body.status);
+    const newStatus = await service.updateStatus(req.params.saleId, req.body.status);
+    
     res.status(200).json(newStatus);
   } catch (error) {
     next(error);

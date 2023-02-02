@@ -9,7 +9,7 @@ const router = Router();
 
 router.get('/customer/:userId', controller.getAllByUserId);
 router.get('/orders/:sellerId', controller.getAll);
-router.put('/orders/:sellerId', controller.updateStatus);
+router.put('/orders/:saleId', controller.updateStatus);
 router.get('/:id', controller.getById);
 router.post('/', authMiddleware, checkoutController.addSale);
 
