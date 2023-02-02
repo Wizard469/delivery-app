@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Header from '../../component/Header';
+import { updateStatus } from '../../services/sales';
 
 const tableHeaders = [
   'Item',
@@ -43,7 +44,11 @@ export default function Order() {
             <button
               type="button"
               data-testid="customer_order_details__button-delivery-check"
-              disabled
+              disabled={ sale.status !== 'Em Trânsito' }
+              onClick={ async (e) => {
+                e.preventDefault();
+                await updateStatus(id, 'Entregue');
+              } }
             >
               Marcar como entregue
             </button>
